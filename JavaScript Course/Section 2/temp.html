@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mouse Events Example</title>
+</head>
+<body>
+
+<button id="myButton">Click me</button>
+
+<script>
+  const button = document.getElementById('myButton');
+
+  button.addEventListener('click', function() {
+    alert('Button clicked!');
+  });
+
+  button.addEventListener('mouseover', function() {
+    button.style.backgroundColor = 'lightblue';
+  });
+
+  button.addEventListener('mouseout', function() {
+    button.style.backgroundColor = '';
+  });
+</script>
+
+</body>
+</html>

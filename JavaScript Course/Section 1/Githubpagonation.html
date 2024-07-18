@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Commits</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+
+        async function* fetchCommits(repo) {
+            let url = `https://api.github.com/repos/${repo}/commits`;
+
+            while (url) {
+                try {
+                    const response = await fetch(url, {
+                        headers: { 'User-Agent': 'Our script' }, // GitHub needs any user-agent header
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Error fetching commits: ${response.statusText}`);
+                    }
+
+                    const body = await response.json();
+
+                    // Get the URL of the next page from the headers
+                    let nextPage = response.headers.get('Link')?.match(/<(.*?)>; rel="next"/);
+                    nextPage = nextPage?.[1];
+
+                    url = nextPage;
+
+                    for (let commit of body) {
+                        yield commit;
+                    }
+                } catch (error) {
+                    console.error(error);
+                    break;
+                }
+            }
+        }
+
+        (async () => {
+            let count = 0;
+
+            for await (const commit of fetchCommits('javascript-tutorial/en.javascript.info')) {
+                console.log(commit.author?.login || 'Unknown Author');
+
+                if (++count === 100) { // Stop at 100 commits
+                    break;
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

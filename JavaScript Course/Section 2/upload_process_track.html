@@ -1,0 +1,24 @@
+<input type="file" onchange="upload(this.files[0])">
+
+<script>
+function upload(file) {
+  let xhr = new XMLHttpRequest();
+
+  // track upload progress
+  xhr.upload.onprogress = function(event) {
+    console.log(`Uploaded ${event.loaded} of ${event.total}`);
+  };
+
+  // track completion: both successful or not
+  xhr.onloadend = function() {
+    if (xhr.status == 200) {
+      console.log("success");
+    } else {
+      console.log("error " + this.status);
+    }
+  };
+
+  xhr.open("POST", "/article/xmlhttprequest/post/upload");
+  xhr.send(file);
+}
+</script>

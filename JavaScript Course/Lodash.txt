@@ -1,0 +1,82 @@
+_.chunk(array, [size=1])
+Splits an array into chunks of the specified size.
+console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); // [['a', 'b'], ['c', 'd']]
+
+_.compact(array)
+Removes falsey values from an array.
+console.log(_.compact([0, 1, false, 2, '', 3])); // [1, 2, 3]
+
+_.concat(array, [values])
+Concatenates arrays and/or values.
+console.log(_.concat([1], 2, [3], [[4]])); // [1, 2, 3, [4]]
+
+
+_.difference(array, [values])
+Creates an array excluding all values from the provided arrays.
+console.log(_.difference([2, 1], [2, 3])); // [1]
+
+_.flatten(array)
+Flattens an array by one level.
+console.log(_.flatten([1, [2, [3, [4]], 5]])); // [1, 2, [3, [4]], 5]
+
+_.flattenDeep(array)
+Recursively flattens an array.
+console.log(_.flattenDeep([1, [2, [3, [4]], 5]])); // [1, 2, 3, 4, 5]
+
+_.uniq(array)
+Creates a duplicate-free version of an array.
+console.log(_.uniq([2, 1, 2])); // [2, 1]
+
+_.merge(object, [sources])
+Deep merges two or more objects.
+const object = { 'a': [{ 'b': 2 }, { 'd': 4 }] };
+const other = { 'a': [{ 'c': 3 }, { 'e': 5 }] };
+console.log(_.merge(object, other)); // { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
+
+_.get(object, path, [defaultValue])
+Gets the value at path of object.
+const object = { 'a': [{ 'b': { 'c': 3 } }] };
+console.log(_.get(object, 'a[0].b.c')); // 3
+console.log(_.get(object, 'a[0].b.d', 'default')); // 'default'
+
+_.set(object, path, value)
+Sets the value at path of object.
+const object = { 'a': [{ 'b': { 'c': 3 } }] };
+_.set(object, 'a[0].b.c', 4);
+console.log(object); // { 'a': [{ 'b': { 'c': 4 } }] }
+
+_.cloneDeep(value)
+Creates a deep clone of value.
+const objects = [{ 'a': 1 }, { 'b': 2 }];
+const deep = _.cloneDeep(objects);
+console.log(deep[0] === objects[0]); // false
+
+
+_.debounce(func, wait, [options])
+Creates a debounced function that delays invoking func until after wait milliseconds have elapsed since the last time the debounced function was invoked.
+const saveInput = _.debounce(() => {
+  console.log('Saving data');
+}, 1000);
+document.getElementById('input').addEventListener('input', saveInput);
+
+_.throttle(func, wait, [options])
+Creates a throttled function that only invokes func at most once per every wait milliseconds.
+const updatePosition = _.throttle(() => {
+  console.log('Updating position');
+}, 1000);
+window.addEventListener('scroll', updatePosition);
+
+_.isEmpty(value)
+Checks if value is an empty object, collection, map, or set.
+console.log(_.isEmpty({})); // true
+console.log(_.isEmpty([])); // true
+console.log(_.isEmpty('')); // true
+console.log(_.isEmpty({ 'a': 1 })); // false
+
+
+_.isEqual(value, other)
+Performs a deep comparison between two values to determine if they are equivalent.
+const object = { 'a': 1 };
+const other = { 'a': 1 };
+console.log(_.isEqual(object, other)); // true
+

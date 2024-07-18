@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Capturing Example</title>
+    <style>
+        .outer { padding: 50px; background-color: lightcoral; }
+        .middle { padding: 50px; background-color: lightblue; }
+        .inner { padding: 50px; background-color: lightgreen; }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        Outer
+        <div class="middle">
+            Middle
+            <div class="inner">
+                Inner
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Capturing:  Top to Bottom
+        // Bubbling : Bottom to Top
+        document.querySelector('.outer').addEventListener('click', function(event) {
+            console.log('Outer capturing');
+        }, true); // true indicates capturing phase
+
+        document.querySelector('.middle').addEventListener('click', function(event) {
+            console.log('Middle capturing');
+        }, true); // true indicates capturing phase
+
+        document.querySelector('.inner').addEventListener('click', function(event) {
+            console.log('Inner capturing');
+        }, true); // true indicates capturing phase
+    </script>
+</body>
+</html>
+
+

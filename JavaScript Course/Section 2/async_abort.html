@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<script>
+"use strict";
+
+(async () => {
+// abort in 1 second
+let controller = new AbortController();
+setTimeout(() => controller.abort(), 1000);
+
+try {
+  let response = await fetch('/article/fetch-abort/demo/hang', {
+    signal: controller.signal
+  });
+} catch(err) {
+  if (err.name == 'AbortError') { // handle abort()
+    alert("Aborted!");
+  } else {
+    throw err;
+  }
+}
+})()
+</script>
+
+
+<!--  Scalable Abort -->
+
+
+let urls = [...];
+let controller = new AbortController();
+
+let ourJob = new Promise((resolve, reject) => { // our task
+  ...
+  controller.signal.addEventListener('abort', reject);
+});
+
+let fetchJobs = urls.map(url => fetch(url, { // fetches
+  signal: controller.signal
+}));
+
+// Wait for fetches and our task in parallel
+let results = await Promise.all([...fetchJobs, ourJob]);

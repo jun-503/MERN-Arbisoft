@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        
+        function* generateSequence(start, end) {
+          for (let i = start; i <= end; i++) yield i;
+        }
+        
+        function* generateAlphaNum() {
+        
+          yield* generateSequence(48, 57);
+          
+        
+          yield* generateSequence(65, 90);
+          
+        
+          yield* generateSequence(97, 122);
+          
+        
+        }
+        
+        let str = '';
+        
+        for(let code of generateAlphaNum()) {
+        
+          str += String.fromCharCode(code);
+        }
+        
+        alert(str); // 0..9A..Za..z
+
+
+        function* generateSequence() {
+            yield 1;
+            yield 2;
+            return 3;
+        }
+
+        let generator = generateSequence();
+
+        let one = generator.next();
+
+        alert(JSON.stringify(one)); // {value: 1, done: false}
+    </script>
+</body>
+</html>

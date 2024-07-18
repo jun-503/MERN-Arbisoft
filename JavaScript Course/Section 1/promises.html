@@ -1,0 +1,69 @@
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Promise Object</h1>
+<h2>The then() Method</h2>
+
+<p id="demo"></p>
+
+<script>
+function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some;
+}
+
+let myPromise = new Promise(function(myResolve, myReject) {
+    /// producing code: can take time to execute /////
+  let x = 0;
+
+// some code (try to change x to 5)
+	x+=5
+
+  if (x == 0) {
+    myResolve("OK");
+  } else {
+    myReject("Error");
+  }
+});
+ /////// consuming code : must wait for result ////////
+myPromise.then(
+    
+  function(value) {myDisplayer(value);},
+  function(error) {myDisplayer(error);}
+);
+</script>
+
+</body>
+</html> -->
+
+
+<!-- Second example  -->
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Promise Object</h1>
+<h2>The then() Metod</h2>
+
+<p>Wait 3 seconds (3000 milliseconds) for this page to change.</p>
+
+<h1 id="demo"></h1>
+
+<script>
+const myPromise = new Promise(function(myResolve, myReject) {
+  setTimeout(function(){ myResolve("I love You !!"); }, 3000);
+});
+
+myPromise.then(function(value) {
+  document.getElementById("demo").innerHTML = value;
+});
+</script>
+
+</body>
+</html>
+
+
+
+<!-- Three states in promises : 1. Pending , 2. Fulfilled, 3. Rejected -->

@@ -1,0 +1,43 @@
+<!doctype html>
+<body>
+<style>
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+</style>
+
+<script>
+    let div = document.createElement('div');
+    div.className = "alert";
+    div.innerHTML = "<strong>Hi there!</strong> You've read an important message.";
+
+    document.body.append(div);
+
+    //////////////// They insert text ////////////
+    let ol = document.createElement('ol')
+    ol.before('before'); // insert string "before" before <ol>
+    ol.after('after'); // insert string "after" after <ol>
+
+    let liFirst = document.createElement('li');
+    liFirst.innerHTML = 'prepend';
+    ol.prepend(liFirst); // insert liFirst at the beginning of <ol>
+
+    let liLast = document.createElement('li');
+    liLast.innerHTML = 'append';
+    ol.append(liLast); // insert liLast at the end of <ol>
+
+    /////  InsertAdjacent Method     //////////
+    ////////// It inserts HTML  ///////////
+    let div = document.createElement('div')    
+    div.insertAdjacentHTML('beforebegin', '<p>Hello</p>');
+    div.insertAdjacentHTML('afterend', '<p>Bye</p>');
+
+
+
+
+</script>
+</body>

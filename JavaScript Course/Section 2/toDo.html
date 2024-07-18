@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+<body>
+    <script>
+        let arr = []
+        while(true){
+            let text = prompt("Enter Text to continue");
+            
+            if ((text === "" || text === null) && arr.length === 0){
+                let h1 = document.createElement('h1')
+                h1.innerText = "Create a to-do list"
+                document.body.append(h1)
+                
+                break
+                
+            }
+            else if (text=== null){
+                break
+            }
+            else if (text === "" && arr.length > 0) {
+                break;
+            }
+            else if (text != null || text != "" ) {
+                let li = document.createElement('li')
+                li.innerText = text
+                arr.push(li)
+            }
+
+            
+            
+
+        }
+
+        if (arr.length > 0){
+            let ul =  document.createElement('ul')
+            document.body.append(ul)
+            for (let li of arr){
+                ul.append(li)
+            }
+        }
+    </script>
+</body>
+</html>
